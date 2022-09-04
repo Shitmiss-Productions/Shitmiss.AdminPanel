@@ -1,11 +1,13 @@
 // Simple application file that initialized the web page (NOT TO BE USED WITH OBS AS A OVERLAY)
-import { TAWebsocket } from "tournament-assistant-client";
+import { TAWebsocket, Packets } from "tournament-assistant-client";
 import { WebSocket } from "ws";
 
 let songData = ["", 0];
 let matchData = ["", ""];
 let inMatch = false;
 let coordinator = "";
+
+
 
 // Do not blame me. Blame whoever Hawk blames.
 var port = 2222;
@@ -21,9 +23,12 @@ wss.on('connection', function connection(ws) {
 });
 
 const taWebsocket = new TAWebsocket({
-    url: "ws://hahafunny.com:2053",
+    url: "ws://ta.danesaber.cc:2053",
     name: "Shitmiss City Admin Panel",
 });
+
+let self = taWebsocket.taClient;
+let taPackets = Packets;
 
 //Connect to the relay server we created above. - Make sure your frontend is connecting to THIS ip.
 let sockets = new WebSocket("ws://localhost:2222");
@@ -33,13 +38,15 @@ sockets.onopen = function (event) {
 };
 
 taWebsocket.taClient.on('matchCreated', async (e) => {
+    
+
     //If the backend is not locked into a current match, we continue.
     if (!inMatch) {
         //Add this client as an associated user
-        // e.data.associated_users.push(taWebsocket.taClient.Self);
-        // taWebsocket.sendEvent(new taWebsocket.Packets.Event({
-        //     match_updated_event: new taWebsocket.Packets.Event.MatchUpdatedEvent({ match: e.data })
-        // }));
+        e.data.associated_users.push(self.Self!);
+        taWebsocket.sendEvent(new taPackets.Event({
+            match_updated_event: new taPackets.Event.MatchUpdatedEvent({ match: e.data })
+        }));
 
         for (var i = 0; i < e.data.associated_users.length; i++) {
             var findCoord = e.data.associated_users[i].name;

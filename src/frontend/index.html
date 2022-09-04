@@ -50,10 +50,7 @@
                 </div>
             </div>
         </div>
-        
-
-        
-
+     
         <div class="SongBox" id="SongBox" style="opacity:0;">
             <div class="SongCard" id="SongCard">
                 <div class="SongCover" id="SongCover"></div>
@@ -142,7 +139,67 @@
                 }
             }
 
-            const ws = new WebSocket("ws://localhost:2222");
+            function cloneAndPopulateNodes(name,scoresaberid) {
+
+                console.log("Cloning");
+                    let playerDiv = document.getElementById("matchbox").cloneNode(true);
+                    // var newPlayerPfp = playerDiv.getElementsByClassName("playerImage")[0];
+                    // newPlayerPfp.src = "https://new.scoresaber.com/api/static/avatars/"+scoresaberid[i]+".jpg";
+                    
+                    // if (data.playerInfo.avatar == "/images/oculus.png") {newPlayerPfp.src = "https://i.imgur.com/3KgARpG.png";}
+                    // if (data.playerInfo.avatar == "/images/steam.png") {newPlayerPfp.src = "https://i.imgur.com/3KgARpG.png";}
+                    
+                    // var newPlayerText = playerDiv.getElementsByClassName("player-text-1")[0];
+                    // newPlayerText.classList.add("playerText" + scoresaberid[i]);
+                    // var newPlayerImage = playerDiv.getElementsByClassName("playerImage")[0];
+                    // newPlayerImage.classList.add("playerImage" + scoresaberid[i]);
+                    
+                    var newPlayerName = playerDiv.getElementsByClassName("player-text-1")[0];
+                    newPlayerName.classList.add("player-text-1" + scoresaberid[0]);
+                    newPlayerName.innerHTML = name[0];
+                    
+                    var newPlayerScore = playerDiv.getElementsByClassName("player-text-1-score")[0];
+                    newPlayerScore.classList.add("player-text-1-score" + scoresaberid[0]);
+                    newPlayerScore.style.transition = "opacity 0.5s";
+                    
+                    var newPlayerAcc = playerDiv.getElementsByClassName("player-text-1-acc")[0];
+                    newPlayerAcc.classList.add("player-text-1-acc" + scoresaberid[0]);
+                    newPlayerAcc.style.transition = "opacity 0.5s";
+                    
+                    var newPlayerCombo = playerDiv.getElementsByClassName("player-text-1-combo")[0];
+                    newPlayerCombo.classList.add("player-text-1-combo" + scoresaberid[0]);
+                    newPlayerCombo.style.transition = "opacity 0.5s";
+                    
+                    playerDiv.id = "playerDiv" + scoresaberid[0];
+                    
+                    var newPlayer2Name = playerDiv.getElementsByClassName("player-text-2")[0];
+                    newPlayer2Name.classList.add("player-text-2" + scoresaberid[0+1]);
+                    newPlayer2Name.innerHTML = name[0+1];
+                    
+                    var newPlayer2Score = playerDiv.getElementsByClassName("player-text-2-score")[0];
+                    newPlayer2Score.classList.add("player-text-2-score" + scoresaberid[0+1]);
+                    newPlayer2Score.style.transition = "opacity 0.5s";
+                    
+                    var newPlayer2Acc = playerDiv.getElementsByClassName("player-text-2-acc")[0];
+                    newPlayer2Acc.classList.add("player-text-2-acc" + scoresaberid[0+1]);
+                    newPlayer2Acc.style.transition = "opacity 0.5s";
+                    
+                    var newPlayer2Combo = playerDiv.getElementsByClassName("player-text-2-combo")[0];
+                    newPlayer2Combo.classList.add("player-text-12-combo" + scoresaberid[0+1]);
+                    newPlayer2Combo.style.transition = "opacity 0.5s";
+                    
+                    playerDiv.id = "playerDiv" + scoresaberid[0+1];
+                    playerDiv.style.transition = "block 0.5s";
+                    playerDiv.style.transition = "opacity 0.5s";
+                    playerDiv.style.display = "block";
+                    playerDiv.style.marginRight = "50px";
+                    playerDiv.style.marginTop = "5px";
+                    playerDiv.style.marginBottom = "25px";
+                    document.getElementById("Players").appendChild(playerDiv);
+                    document.getElementById("Players").style.opacity = "1";
+            }
+
+            const ws = new WebSocket("ws://192.168.0.69:2222");
             ws.onopen = function () {
                 console.log("Msg sent, connected");
             };
@@ -163,81 +220,14 @@
                 if (jsonObj.Type == 4) /* Score Update */ {
                     updateScores(jsonObj.playerId,jsonObj.score,jsonObj.combo,jsonObj.acc*100);
                 }
-            };
 
-            function cloneAndPopulateNodes(scoresaberid) {
-
-                for (let i = 0; i > scoresaberid.length; i++) {
-                
-                    let playerDiv = document.getElementById("matchbox").cloneNode(true);
-                    // var newPlayerPfp = playerDiv.getElementsByClassName("playerImage")[0];
-                    // newPlayerPfp.src = "https://new.scoresaber.com/api/static/avatars/"+scoresaberid[i]+".jpg";
-
-                    // if (data.playerInfo.avatar == "/images/oculus.png") {newPlayerPfp.src = "https://i.imgur.com/3KgARpG.png";}
-                    // if (data.playerInfo.avatar == "/images/steam.png") {newPlayerPfp.src = "https://i.imgur.com/3KgARpG.png";}
-
-                    // var newPlayerText = playerDiv.getElementsByClassName("player-text-1")[0];
-                    // newPlayerText.classList.add("playerText" + scoresaberid[i]);
-                    // var newPlayerImage = playerDiv.getElementsByClassName("playerImage")[0];
-                    // newPlayerImage.classList.add("playerImage" + scoresaberid[i]);
-                    var newPlayerName = playerDiv.getElementsByClassName("player-text-1")[0];
-                    newPlayerName.classList.add("player-text-1" + scoresaberid[i]);
-                    newPlayerName.innerHTML = name[i];
-
-                    var newPlayerScore = playerDiv.getElementsByClassName("player-text-1-score")[0];
-                    newPlayerScore.classList.add("player-text-1-score" + scoresaberid[i]);
-                    newPlayerScore.style.transition = "opacity 0.5s";
-
-                    var newPlayerAcc = playerDiv.getElementsByClassName("player-text-1-acc")[0];
-                    newPlayerAcc.classList.add("player-text-1-acc" + scoresaberid[i]);
-                    newPlayer.style.transition = "opacity 0.5s";
-
-                    var newPlayerCombo = playerDiv.getElementsByClassName("player-text-1-combo")[0];
-                    newPlayerCombo.classList.add("player-text-1-combo" + scoresaberid[i]);
-                    newPlayerCombo.style.transition = "opacity 0.5s";
-
-                    playerDiv.id = "playerDiv" + scoresaberid[i];
-                    playerDiv.style.transition = "block 0.5s";
-                    playerDiv.style.transition = "opacity 0.5s";
-                    playerDiv.style.display = "block";
-                    playerDiv.style.marginRight = "50px";
-                    playerDiv.style.marginTop = "5px";
-                    playerDiv.style.marginBottom = "25px";
-                    document.getElementById("Players").appendChild(playerDiv);
-                    document.getElementById("Players").style.opacity = "1";
-
-                    versusDiv = document.getElementById("versus").cloneNode(true);
-                    document.getElementById("Players").appendChild(versusDiv);
-
-                    var player2Div = document.getElementById("matchbox").cloneNode(true);
-
-                    var newPlayer2Name = player2Div.getElementsByClassName("player-text-2")[0];
-                    newPlayer2Name.classList.add("player-text-1" + scoresaberid[i]);
-                    newPlayer2Name.innerHTML = name[i];
-
-                    var newPlayer2Score = player2Div.getElementsByClassName("player-text-2-score")[0];
-                    newPlayer2Score.classList.add("player-text-1-score" + scoresaberid[i]);
-                    newPlayer2Score.style.transition = "opacity 0.5s";
-
-                    var newPlayer2Acc = player2Div.getElementsByClassName("player-text-2-acc")[0];
-                    newPlayer2Acc.classList.add("player-text-1-acc" + scoresaberid[i]);
-                    newPlayer2Acc.style.transition = "opacity 0.5s";
-
-                    var newPlayer2Combo = player2Div.getElementsByClassName("player-text-3-combo")[0];
-                    newPlayer2Combo.classList.add("player-text-1-combo" + scoresaberid[i]);
-                    newPlayer2Combo.style.transition = "opacity 0.5s";
-
-                    playerDiv.id = "playerDiv" + scoresaberid[i];
-                    playerDiv.style.transition = "block 0.5s";
-                    playerDiv.style.transition = "opacity 0.5s";
-                    playerDiv.style.display = "block";
-                    playerDiv.style.marginRight = "50px";
-                    playerDiv.style.marginTop = "5px";
-                    playerDiv.style.marginBottom = "25px";
-                    document.getElementById("Players").appendChild(player2Div);
-                    document.getElementById("Players").style.opacity = "1";
+                if (jsonObj.Type == 6) { //Match Created
+                    if (jsonObj.command == "createUsers") {
+                        console.log("Creating users");
+                        cloneAndPopulateNodes(jsonObj.PlayerNames, jsonObj.PlayerIds);
+                    }
                 }
-            }
+            };
         </script>
     </body>
 </html>
