@@ -2,11 +2,11 @@
 let currentSong = "";
 let currentDiff = "";
 function updateScores(player, score, combo, acc) {
-    p1counters = [0, 0, 0, 0];
-    p2counters = [0, 0, 0, 0];
-    // if (combo > 0) {
-    // P1ComboCounter++;
+
     if (P1 == player) {
+        let playertext1score = document.getElementsByClassName("player-text-1-score"+player)[0];
+        let playertext1combo = document.getElementsByClassName("player-text-1-combo"+player)[0];
+        let playertext1acc = document.getElementsByClassName("player-text-1-acc"+player)[0];
         console.log("P1 | Score: " + score + " | Combo: " + combo + " | ACC: " + acc + "%");
         acc = acc.toFixed(2);
         playertext1score.innerHTML = score;
@@ -14,6 +14,9 @@ function updateScores(player, score, combo, acc) {
         playertext1acc.innerHTML = acc + "%";
     }
     if (P2 == player) {
+        let playertext2score = document.getElementsByClassName("player-text-2-score"+player)[0];
+        let playertext2combo = document.getElementsByClassName("player-text-2-combo"+player)[0];
+        let playertext2acc = document.getElementsByClassName("player-text-2-acc"+player)[0];
         console.log("P2 | Score: " + score + " | Combo: " + combo + " | ACC: " + acc + "%");
         acc = acc.toFixed(2);
         playertext2score.innerHTML = score;

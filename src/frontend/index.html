@@ -142,7 +142,9 @@
             function cloneAndPopulateNodes(name,scoresaberid) {
 
                 console.log("Cloning");
-                    let playerDiv = document.getElementById("matchbox").cloneNode(true);
+                P1 = scoresaberid[0];
+                P2 = scoresaberid[1];
+                let playerDiv = document.getElementById("matchbox").cloneNode(true);
                     // var newPlayerPfp = playerDiv.getElementsByClassName("playerImage")[0];
                     // newPlayerPfp.src = "https://new.scoresaber.com/api/static/avatars/"+scoresaberid[i]+".jpg";
                     
@@ -185,7 +187,7 @@
                     newPlayer2Acc.style.transition = "opacity 0.5s";
                     
                     var newPlayer2Combo = playerDiv.getElementsByClassName("player-text-2-combo")[0];
-                    newPlayer2Combo.classList.add("player-text-12-combo" + scoresaberid[0+1]);
+                    newPlayer2Combo.classList.add("player-text-2-combo" + scoresaberid[0+1]);
                     newPlayer2Combo.style.transition = "opacity 0.5s";
                     
                     playerDiv.id = "playerDiv" + scoresaberid[0+1];
@@ -199,7 +201,7 @@
                     document.getElementById("Players").style.opacity = "1";
             }
 
-            const ws = new WebSocket("ws://192.168.0.69:2222");
+            const ws = new WebSocket("ws://localhost:2222");
             ws.onopen = function () {
                 console.log("Msg sent, connected");
             };
