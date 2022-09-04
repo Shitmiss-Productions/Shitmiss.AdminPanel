@@ -1,0 +1,218 @@
+body {
+    background-color: rgb(40, 40, 40);
+    color: white;
+    font-family: Poppins;
+	font-weight: Regular;
+}
+
+.match-box {
+    border-radius: 5px;
+    background-color: rgb(70, 70, 70);
+    padding: 3px 3px 3px 6px;
+}
+
+.match-users {
+    border-radius: 5px;
+    background-color: rgb(70, 70, 70);
+    padding: 3px 3px 3px 6px !important;
+    display: inline-flex;
+    text-align: center;
+}
+
+.player-container-1, .player-container-2 {
+    padding-left: 6px;
+    padding-right: 6px;
+}
+
+.player-text-1-combo, .player-text-2-combo {
+    font-style: italic;
+    font-size: small !important;
+    font-weight: lighter !important ;
+}
+
+.player-text-1-acc, .player-text-2-acc {
+    font-style: italic;
+    font-size: medium;
+    font-weight: lighter !important ;
+}
+
+.player-text-1, .player-text-2 {
+    font-size: medium;
+    font-weight: bolder !important;
+}
+
+.adminbutton::before {
+    display: flex;
+}
+
+.coordinator-required {
+    display: block;
+    opacity: 0;
+    transition: opacity 0.5s;
+}
+
+.vs {
+    font-size: small;
+    padding-left: 6px;
+    padding-right: 6px;
+}
+
+.SongBox {
+	width: 530px;
+	height: 160px;
+	opacity: 1;
+	position: absolute;
+	top: 926px;
+	left: 1392px;
+	overflow: hidden;
+	transition-timing-function: ease-in-out;
+    transition: opacity 1s;
+}
+
+.SongCard {
+	width: 529px;
+	height: 214px;
+	opacity: 1;
+	position: absolute;
+	top: 0px;
+	left: 0px;
+}
+
+.SongCover {
+	width: 144px;
+	height: 142px;
+	background: url("../styles/songPlaceholder.png");
+	background-repeat: no-repeat;
+	background-position: center center;
+	background-size: cover;
+	opacity: 1;
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	border-left: 3px solid;
+	border-top: 3px solid;
+	border-bottom: 3px solid;
+	border-color: #039a00;
+	border-top-left-radius: 25px;
+	border-bottom-left-radius: 25px;
+	box-shadow: 0px 4px 4px rgb(0 0 0 / 25%);
+	transition-timing-function: ease-in-out;
+	transition: border-color 1s;
+}
+
+.SongInfo {
+	width: 378px;
+	height: 142px;
+	background: rgb(0 0 0 / 79%);
+	opacity: 1;
+	position: absolute;
+	top: 0px;
+	left: 143px;
+	border: 3px solid;
+	border-color: #039a00;
+	border-top-right-radius: 25px;
+	border-bottom-right-radius: 25px;
+	box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+	transition-timing-function: ease-in-out;
+	transition: border-color 1s;
+}
+
+.DiffTag {
+	width: 67px;
+	height: 26px;
+	background: #039a00;
+	opacity: 1;
+	position: absolute;
+	top: 101px;
+	left: 158px;
+	border-top-left-radius: 7px;
+	border-top-right-radius: 7px;
+	border-bottom-left-radius: 7px;
+	border-bottom-right-radius: 7px;
+	overflow: hidden;
+	transition: opacity 1s;
+	transition-timing-function: ease-in-out;
+	transition: background 1s;
+}
+
+.DiffText {
+	width: 54px;
+	color: rgba(255, 255, 255, 1);
+	position: absolute;
+	top: 104px;
+	left: 165px;
+	font-family: Poppins;
+	font-weight: 700;
+	font-size: 13px;
+	opacity: 1;
+	text-align: center;
+	transition: opacity 1s;
+}
+
+.SongArtist {
+	width: 203px;
+	color: rgba(255, 255, 255, 1);
+	position: absolute;
+	top: 15px;
+	left: 158px;
+	font-family: Poppins;
+	font-weight: Regular;
+	font-size: 15px;
+	opacity: 1;
+	text-align: left;
+}
+
+.SongTitle {
+	width: 340px;
+	color: rgba(255, 255, 255, 1);
+	position: absolute;
+	top: 39px;
+	left: 158px;
+	font-family: Poppins;
+	font-weight: Bold;
+	font-size: 20px;
+	opacity: 1;
+	text-align: left;
+	overflow: hidden;
+	white-space: nowrap;
+	-webkit-mask-image: linear-gradient(90deg, #000 81%, transparent);
+}
+
+.SongMapper {
+	width: 309px;
+	color: rgba(255, 255, 255, 1);
+	position: absolute;
+	top: 72px;
+	left: 158px;
+	font-family: Poppins;
+	font-weight: Regular;
+	font-size: 14px;
+	opacity: 1;
+	text-align: left;
+}
+
+.SongKey {
+	width: 49px;
+	color: rgba(255, 255, 255, 1);
+	position: absolute;
+	top: 15px;
+	left: 450px;
+	font-family: Poppins;
+	font-weight: Regular;
+	font-size: 13px;
+	opacity: 1;
+	text-align: right;
+}
+
+.SongLength {
+	width: 37px;
+	color: rgba(255, 255, 255, 1);
+	position: absolute;
+	top: 109px;
+	left: 463px;
+	font-family: Poppins;
+	font-weight: Regular;
+	font-size: 13px;
+	opacity: 1;
+	text-align: right;
+}

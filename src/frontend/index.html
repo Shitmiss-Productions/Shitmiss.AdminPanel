@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <link href="https://fonts.googleapis.com/css?family=Poppins&amp;display=swap" rel="stylesheet">
+
+        <link rel="stylesheet" href="./styles/index.css">
+        <title>Shitmiss City Match Stats</title>
+    </head>
+    <body>
+        <div class="match-box">
+            <div class="match-users"> 
+                <div class="player-container-1">
+                    <h1 class="player-text-1"></h1>
+                    <h2 class="player-text-1-score"></h2>
+                    <h2 class="player-text-1-combo"></h2>
+                    <h2 class="player-text-1-acc"></h2>
+                    
+                </div>
+                <p class="vs"> vs. </p>
+                <div class="player-container-2">
+                    <h1 class="player-text-2"></h1>
+                    <h2 class="player-text-2-score"></h2>
+                    <h2 class="player-text-2-combo"></h2>
+                    <h2 class="player-text-2-acc"></h2>
+                </div>
+                
+            </div>
+
+            <div>
+                <button type="button" class="adminbutton" onclick="adminReq(1)">
+                    SOS
+                </button>
+                
+                <button type="button" class="adminbutton" onclick="adminReq(2)">
+                    Mark admin present
+                </button>
+                
+                <button type="button" class="adminbutton" onclick="adminReq(3)">
+                    Resolve 
+                </button>
+            </div>
+    
+            <div>
+                <h3 class="coordinator-required">Admin assistance has beeen requested!</h3>
+            </div>
+        </div>
+
+        
+
+        <div class="SongBox" id="SongBox" style="opacity:0;">
+            <div class="SongCard" id="SongCard">
+                <div class="SongCover" id="SongCover"></div>
+                <div class="SongInfo" id="SongInfo"></div>
+                <div class="DiffTag" id="DiffTag"></div>
+                <span class="DiffText" id="DiffText">Easy</span>
+                <span class="SongArtist" id="SongArtist">Lauv</span>
+                <span class="SongTitle" id="SongTitle">Breathe</span>
+                <span class="SongMapper" id="SongMapper">NightHawk</span>
+                <span class="SongKey" id="SongKey">28ded</span>
+                <span class="SongLength" id="SongLength">3:59</span>
+            </div>
+        </div>
+
+        <script src="./song.js"></script>
+        <script>
+            const queryString = window.location.search;
+            const urlParams = new URLSearchParams(queryString);
+
+            const p1id = urlParams.get('p1');
+            const p2id = urlParams.get('p2');
+
+            var P1 = p1id;
+            var P2 = p2id;
+
+            let combo = [0, 0];
+            let acc = [0, 0];
+            let score = [0, 0];
+
+            let matchusers = document.getElementsByClassName("match-users")[0];
+            let playercontainer1 = document.getElementsByClassName("player-container-1")[0];
+            let playertext1 = document.getElementsByClassName("player-text-1")[0];
+            let playertext1score = document.getElementsByClassName("player-text-1-score")[0];
+            let playertext1combo = document.getElementsByClassName("player-text-1-combo")[0];
+            let playertext1acc = document.getElementsByClassName("player-text-1-acc")[0];
+            let playercontainer2 = document.getElementsByClassName("player-container-2")[0];
+            let playertext2 = document.getElementsByClassName("player-text-2")[0];
+            let playertext2score = document.getElementsByClassName("player-text-2-score")[0];
+            let playertext2combo = document.getElementsByClassName("player-text-2-combo")[0];
+            let playertext2acc = document.getElementsByClassName("player-text-2-acc")[0];
+            let adminrequired = document.getElementsByClassName("coordinator-required")[0];
+
+            async function setPFP(P1,P2) {
+                fetch('https://new.scoresaber.com/api/player/'+P1+'/basic')
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.playerInfo.playerId == P1) {
+                        // Player1PFP.style.backgroundImage = "url(https://new.scoresaber.com"+data.playerInfo.avatar;
+                        playertext1.innerHTML = data.playerInfo.playerName;
+                        }
+                    });
+                    fetch('https://new.scoresaber.com/api/player/'+P2+'/basic')
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.playerInfo.playerId == P2) {
+                        // Player2PFP.style.backgroundImage = "url(https://new.scoresaber.com"+data.playerInfo.avatar;
+                        playertext2.innerHTML = data.playerInfo.playerName;
+                        } 
+                    });
+                } 
+            if (P1 != null && P2 != null) {
+                setPFP(P1,P2);
+            }
+
+            function adminReq(type) {
+                if (type == 1) {
+                    adminrequired.style.opacity = "1";
+                }
+                
+                if (type == 2) {
+                    adminrequired.style.opacity = "0";
+
+                    setTimeout(function(){
+                        adminrequired.innerHTML = "Admin is present and resolving issue.";
+                        adminrequired.style.opacity = "1";
+                    }, 500);
+
+                }
+
+                if (type == 3) {
+                    adminrequired.style.opacity = "0";
+                    setTimeout(function(){
+                        adminrequired.style.opacity = "0";
+                        adminrequired.innerHTML = "Admin assistance has beeen requested!";
+                    }, 500);
+                }
+            }
+
+            const ws = new WebSocket("ws://localhost:2222");
+            ws.onopen = function () {
+                console.log("Msg sent, connected");
+            };
+
+
+            ws.onmessage = async function (event) {
+                jsonObj = JSON.parse(event.data);
+            
+                if (jsonObj.Type == 2) /* Match Deleted */ {
+                
+                }
+                if (jsonObj.Type == 3) /* LevelChanged */ {
+                    var LevelId = jsonObj.LevelId;
+                    var Diff = jsonObj.Diff;
+                
+                    getMap(LevelId, Diff);
+                }
+                if (jsonObj.Type == 4) /* Score Update */ {
+                    updateScores(jsonObj.playerId,jsonObj.score,jsonObj.combo,jsonObj.acc*100);
+                }
+            };
+        </script>
+    </body>
+</html>
