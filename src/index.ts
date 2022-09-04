@@ -21,8 +21,8 @@ wss.on('connection', function connection(ws) {
 });
 
 const taWebsocket = new TAWebsocket({
-    url: "ws://ta.danesaber.cc:2053",
-    name: "Dane Saber Overlay",
+    url: "ws://hahafunny.com:2053",
+    name: "Shitmiss City Admin Panel",
 });
 
 //Connect to the relay server we created above. - Make sure your frontend is connecting to THIS ip.
