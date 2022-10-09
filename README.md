@@ -1,40 +1,46 @@
-# Basic page that leeches off TA
+# Getting Started with Create React App
 
-## What's in the repo?
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-The repo contains 2 files to worry about: `index.js/ts` and `frontend/index.html`  
+## Available Scripts
 
-- `index.js/ts` contains the code to the relay server, and handles the actual TournamentAssistant-server connection.
-- `frontend/index.html` & `frontend/song.js/ts` contains the frontend code to generate the overlay, and should be hosted on a webserver.
+In the project directory, you can run:
 
-Index.html can be previewed by using the variables `?p1=[scoresaberID]&p2=[scoresaberID]`.
-It's mostly used to make sure that style changes didn't mess it up.
+### `yarn start`
 
-## Deployment
+Runs the app in the development mode.\
+Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-Before you deploy the relay server, there's a few things to change:
+The page will reload if you make edits.\
+You will also see any lint errors in the console.
 
-You'll want to replace the following lines port numbers; `29`, `36` and `44` in `index.js/ts`, the ports I've used here are the same as @ThaNightHawk's relay server.
+### `yarn test`
 
-Start out by opening your terminal of choice, and navigate to the directory where `main.js/ts` is located.
+Launches the test runner in the interactive watch mode.\
+See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-Proceed to run:
+### `yarn build`
 
-```bash
-  yarn
-```
+Builds the app for production to the `build` folder.\
+It correctly bundles React in production mode and optimizes the build for the best performance.
 
-and then
+The build is minified and the filenames include the hashes.\
+Your app is ready to be deployed!
 
-```bash
-  node index.js
-  // or
-  ts-node index.ts
-```
+See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-If all goes well, you should see "Connected to relay server".
+### `yarn eject`
 
-- `index.html` can be deployed on GitHub-pages or your own webserver. 
+**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
 
-Add a browser source to OBS, with 1920x1080 dimensions, linking to **http**://IP_OR_URL/index.html  
-(Do **not** use HTTPS, as it **will** refuse the connecting to a non-secured WebSocket Server.)
+If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+
+Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+
+You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+
+## Learn More
+
+You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+
+To learn React, check out the [React documentation](https://reactjs.org/).
